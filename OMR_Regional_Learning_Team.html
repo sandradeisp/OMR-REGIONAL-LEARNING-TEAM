@@ -6,162 +6,110 @@
 <title>OMR · Evaluación de Liderazgo · Regional Learning Team</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #1a7c3e;
-    --green-mid: #2da05a;
-    --green-pale: #eaf5ee;
-    --green-border: #b6ddc4;
-    --dark: #0f1f17;
-    --mid: #3a4f41;
-    --soft: #7a9485;
-    --border: #dde8e2;
-    --bg: #f4f8f5;
-    --white: #ffffff;
-    --gold: #e8b84b;
-    --shadow: 0 2px 16px rgba(15,31,23,0.08);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; }
-
-  /* HEADER */
-  .header { background: var(--green); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 64px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-  .header-brand { display: flex; align-items: center; gap: 14px; }
-  .isp-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; color: white; letter-spacing: 0.5px; line-height: 1.2; }
-  .isp-logo span { color: var(--gold); }
-  .header-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.3); }
-  .header-title { font-family: 'Lato', sans-serif; font-weight: 300; font-size: 14px; color: rgba(255,255,255,0.85); letter-spacing: 0.5px; }
-  .header-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; }
-
-  /* PROGRESS */
-  .progress-wrap { background: var(--green); padding: 0 40px 16px; }
-  .progress-steps { display: flex; gap: 6px; align-items: center; }
-  .progress-step { height: 3px; border-radius: 2px; flex: 1; background: rgba(255,255,255,0.2); transition: background 0.4s; }
-  .progress-step.done { background: var(--gold); }
-  .progress-step.active { background: white; }
-  .progress-label { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 6px; letter-spacing: 0.5px; }
-
-  /* MAIN */
-  .main { max-width: 1100px; margin: 0 auto; padding: 36px 24px 60px; }
-
-  /* CARD */
-  .card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 24px; overflow: hidden; }
-  .card-header { background: var(--green-pale); border-bottom: 1px solid var(--green-border); padding: 18px 28px; display: flex; align-items: center; gap: 12px; }
-  .card-step { width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: white; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--green); }
-  .card-subtitle { font-size: 12px; color: var(--soft); margin-top: 2px; }
-  .card-body { padding: 24px 28px; }
-
-  /* SCHOOL SELECTOR */
-  .school-select-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: calc(100vh - 120px); padding: 40px 24px; }
-  .select-hero { background: linear-gradient(135deg, var(--green) 0%, #0f4d28 100%); border-radius: 20px; padding: 40px; color: white; text-align: center; margin-bottom: 36px; width: 100%; max-width: 560px; position: relative; overflow: hidden; }
-  .select-hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
-  .select-hero-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; margin-bottom: 10px; }
-  .select-hero-sub { font-size: 14px; opacity: 0.85; line-height: 1.6; }
-  .select-intro { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; max-width: 560px; width: 100%; margin-bottom: 28px; font-size: 13.5px; line-height: 1.75; color: var(--mid); }
-  .select-intro p { margin-bottom: 12px; }
-  .select-intro p:last-child { margin-bottom: 0; }
-  .select-intro strong { color: var(--dark); }
-  .select-label { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--soft); margin-bottom: 12px; text-align: center; }
-  .school-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; width: 100%; max-width: 560px; }
-  .school-btn { background: white; border: 2px solid var(--border); border-radius: 12px; padding: 14px 18px; cursor: pointer; text-align: left; transition: all 0.18s; font-family: 'Lato', sans-serif; }
-  .school-btn:hover { border-color: var(--green); background: var(--green-pale); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,124,62,0.1); }
-  .school-btn-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--dark); }
-  .school-btn-count { font-size: 11px; color: var(--soft); margin-top: 3px; }
-
-  /* INTRO BOX */
-  .intro-box { background: linear-gradient(135deg, var(--green) 0%, #0f4d28 100%); border-radius: 16px; padding: 32px 36px; color: white; margin-bottom: 24px; position: relative; overflow: hidden; }
-  .intro-box::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }
-  .intro-school { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; margin-bottom: 6px; }
-  .intro-meta { display: flex; gap: 16px; margin-top: 18px; flex-wrap: wrap; }
-  .intro-meta-item { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 7px 13px; font-size: 12px; }
-  .intro-meta-item strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 1px; }
-  .back-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; margin-bottom: 16px; display: inline-block; font-family: 'Syne', sans-serif; transition: background 0.15s; }
-  .back-btn:hover { background: rgba(255,255,255,0.25); }
-
-  /* CONTEXT TABLE */
-  .context-table { width: 100%; border-collapse: collapse; }
-  .context-table th { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--soft); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--border); }
-  .context-table td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  .context-table tr:last-child td { border-bottom: none; }
-  .context-table tr:hover td { background: var(--green-pale); }
-  .person-name { font-weight: 700; font-size: 14px; }
-  .person-role { font-size: 12px; color: var(--soft); margin-top: 2px; }
-  .radio-group { display: flex; gap: 8px; }
-  .radio-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: white; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; color: var(--mid); font-family: 'Lato', sans-serif; }
-  .radio-btn:hover { border-color: var(--green); color: var(--green); }
-  .radio-btn.selected-si { background: #fff3cd; border-color: var(--gold); color: #7a5c00; }
-  .radio-btn.selected-no { background: var(--green-pale); border-color: var(--green); color: var(--green); }
-
-  /* EVAL GRID */
-  .grid-note { background: #fffbf0; border: 1px solid #f0d080; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #7a5c00; margin-bottom: 20px; line-height: 1.5; }
-  .grid-scroll { overflow-x: auto; }
-  .eval-grid { width: 100%; border-collapse: collapse; min-width: 800px; }
-  .eval-grid th { padding: 10px 8px; border-bottom: 2px solid var(--border); vertical-align: bottom; }
-  .th-question { text-align: left; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; color: var(--soft); letter-spacing: 0.8px; text-transform: uppercase; width: 260px; padding-right: 16px; }
-  .th-person { text-align: center; min-width: 105px; }
-  .th-person-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; color: var(--dark); display: block; }
-  .th-person-role { font-size: 10px; color: var(--soft); display: block; margin-top: 2px; font-weight: 400; }
-  .eval-grid td { padding: 8px 5px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  .eval-grid tr:hover td { background: var(--green-pale); }
-  .question-number { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 3px; }
-  .question-number.pot { color: #7b2d8b; }
-  .question-text { font-size: 12.5px; line-height: 1.4; color: var(--dark); }
-  .section-divider td { background: var(--green-pale) !important; padding: 7px 12px !important; }
-  .section-divider-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--green); }
-  .resp-select { display: flex; flex-direction: column; gap: 3px; align-items: center; }
-  .resp-opt { width: 100px; padding: 4px 5px; border-radius: 5px; border: 1.5px solid var(--border); background: white; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.12s; color: var(--mid); text-align: center; font-family: 'Lato', sans-serif; }
-  .resp-opt:hover { border-color: var(--green); }
-  .resp-opt.sel-c { background: #d4edda; border-color: #28a745; color: #155724; }
-  .resp-opt.sel-d { background: #d1ecf1; border-color: #17a2b8; color: #0c5460; }
-  .resp-opt.sel-p { background: #fff3cd; border-color: #ffc107; color: #856404; }
-  .resp-opt.sel-n { background: #f8d7da; border-color: #dc3545; color: #721c24; }
-
-  /* CLOSING */
-  .closing-grid { width: 100%; border-collapse: collapse; }
-  .closing-grid th { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--soft); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--border); }
-  .closing-grid td { padding: 14px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  .closing-grid tr:last-child td { border-bottom: none; }
-  .closing-grid tr:hover td { background: var(--green-pale); }
-  .axis-group { display: flex; gap: 6px; flex-wrap: wrap; }
-  .axis-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: white; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; color: var(--mid); font-family: 'Lato', sans-serif; }
-  .axis-btn:hover { border-color: var(--green); }
-  .axis-btn.sel-lim { background: #f8d7da; border-color: #c0392b; color: #c0392b; }
-  .axis-btn.sel-bue { background: #fff3cd; border-color: #f39c12; color: #7a5c00; }
-  .axis-btn.sel-alt { background: var(--green-pale); border-color: var(--green); color: var(--green); }
-
-  /* SUBMIT */
-  .submit-area { text-align: center; padding: 28px 0 12px; }
-  .submit-btn { background: var(--green); color: white; border: none; padding: 13px 36px; border-radius: 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(26,124,62,0.3); }
-  .submit-btn:hover { background: var(--green-mid); transform: translateY(-1px); }
-
-  /* RESULTS */
-  #results-screen { display: none; }
-  .results-header { background: linear-gradient(135deg, var(--green) 0%, #0f4d28 100%); border-radius: 16px; padding: 32px 40px; color: white; margin-bottom: 28px; text-align: center; }
-  .results-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 6px; }
-  .results-sub { font-size: 13px; opacity: 0.8; }
-  .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-bottom: 28px; }
-  .result-card { background: white; border-radius: 13px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
-  .result-card-top { padding: 14px 16px 10px; border-bottom: 1px solid var(--border); }
-  .result-person-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 2px; }
-  .result-person-role { font-size: 11px; color: var(--soft); }
-  .result-card-bottom { padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
-  .result-box-number { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; color: white; flex-shrink: 0; }
-  .result-box-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; color: var(--dark); }
-  .result-axes { font-size: 11px; color: var(--soft); margin-top: 2px; }
-  .result-new-badge { background: #fff3cd; border: 1px solid var(--gold); color: #7a5c00; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 10px; margin-top: 4px; display: inline-block; }
-
-  @media (max-width: 700px) {
-    .header { padding: 0 16px; }
-    .progress-wrap { padding: 0 16px 14px; }
-    .main { padding: 20px 12px 40px; }
-    .select-hero { padding: 24px 20px; }
-    .intro-box { padding: 22px 20px; }
-    .card-body { padding: 16px; }
-  }
+  :root{--green:#1a7c3e;--green-mid:#2da05a;--green-pale:#eaf5ee;--green-border:#b6ddc4;--dark:#0f1f17;--mid:#3a4f41;--soft:#7a9485;--border:#dde8e2;--bg:#f4f8f5;--white:#ffffff;--gold:#e8b84b;--shadow:0 2px 16px rgba(15,31,23,0.08);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;}
+  .header{background:var(--green);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 12px rgba(0,0,0,0.15);}
+  .header-brand{display:flex;align-items:center;gap:14px;}
+  .isp-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:white;line-height:1.2;}
+  .isp-logo span{color:var(--gold);}
+  .header-divider{width:1px;height:28px;background:rgba(255,255,255,0.3);}
+  .header-title{font-family:'Lato',sans-serif;font-weight:300;font-size:14px;color:rgba(255,255,255,0.85);}
+  .header-badge{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.9);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;}
+  .progress-wrap{background:var(--green);padding:0 40px 16px;}
+  .progress-steps{display:flex;gap:6px;}
+  .progress-step{height:3px;border-radius:2px;flex:1;background:rgba(255,255,255,0.2);transition:background 0.4s;}
+  .progress-step.done{background:var(--gold);}
+  .progress-step.active{background:white;}
+  .progress-label{font-size:11px;color:rgba(255,255,255,0.6);margin-top:6px;}
+  .main{max-width:1100px;margin:0 auto;padding:36px 24px 60px;}
+  .school-select-screen{display:flex;flex-direction:column;align-items:center;min-height:calc(100vh - 120px);padding:40px 24px;}
+  .select-hero{background:linear-gradient(135deg,var(--green) 0%,#0f4d28 100%);border-radius:20px;padding:40px;color:white;text-align:center;margin-bottom:32px;width:100%;max-width:580px;position:relative;overflow:hidden;}
+  .select-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.04);}
+  .select-hero-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:10px;}
+  .select-hero-sub{font-size:14px;opacity:0.85;line-height:1.6;}
+  .select-intro{background:white;border:1px solid var(--border);border-radius:14px;padding:24px 28px;max-width:580px;width:100%;margin-bottom:28px;font-size:13.5px;line-height:1.75;color:var(--mid);}
+  .select-intro p{margin-bottom:12px;}
+  .select-intro p:last-child{margin-bottom:0;}
+  .select-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin-bottom:12px;}
+  .school-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;width:100%;max-width:580px;}
+  .school-btn{background:white;border:2px solid var(--border);border-radius:12px;padding:14px 18px;cursor:pointer;text-align:left;transition:all 0.18s;font-family:'Lato',sans-serif;}
+  .school-btn:hover{border-color:var(--green);background:var(--green-pale);transform:translateY(-1px);box-shadow:0 4px 12px rgba(26,124,62,0.1);}
+  .school-btn-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--dark);}
+  .school-btn-count{font-size:11px;color:var(--soft);margin-top:3px;}
+  .card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px;overflow:hidden;}
+  .card-header{background:var(--green-pale);border-bottom:1px solid var(--green-border);padding:18px 28px;display:flex;align-items:center;gap:12px;}
+  .card-step{width:28px;height:28px;border-radius:50%;background:var(--green);color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--green);}
+  .card-subtitle{font-size:12px;color:var(--soft);margin-top:2px;}
+  .card-body{padding:24px 28px;}
+  .intro-box{background:linear-gradient(135deg,var(--green) 0%,#0f4d28 100%);border-radius:16px;padding:32px 36px;color:white;margin-bottom:24px;position:relative;overflow:hidden;}
+  .intro-box::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.04);}
+  .intro-school{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:6px;}
+  .intro-desc{font-size:14px;opacity:0.85;line-height:1.7;max-width:600px;}
+  .intro-meta{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;}
+  .intro-meta-item{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:7px 13px;font-size:12px;}
+  .intro-meta-item strong{display:block;font-size:15px;font-weight:700;margin-bottom:1px;}
+  .back-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:16px;display:inline-block;font-family:'Syne',sans-serif;}
+  .context-note{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:12px 16px;font-size:12.5px;color:#6d4c00;margin-bottom:18px;line-height:1.6;}
+  .context-table{width:100%;border-collapse:collapse;}
+  .context-table th{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--soft);padding:8px 12px;text-align:left;border-bottom:2px solid var(--border);}
+  .context-table td{padding:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  .context-table tr:last-child td{border-bottom:none;}
+  .context-table tr:hover td{background:var(--green-pale);}
+  .person-name{font-weight:700;font-size:14px;}
+  .person-role{font-size:12px;color:var(--soft);margin-top:2px;}
+  .radio-group{display:flex;gap:8px;flex-wrap:wrap;}
+  .radio-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:white;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;color:var(--mid);font-family:'Lato',sans-serif;}
+  .radio-btn:hover{border-color:var(--green);color:var(--green);}
+  .radio-btn.selected-si{background:#fff3cd;border-color:var(--gold);color:#7a5c00;}
+  .radio-btn.selected-no{background:var(--green-pale);border-color:var(--green);color:var(--green);}
+  .grid-note{background:#fffbf0;border:1px solid #f0d080;border-radius:8px;padding:12px 16px;font-size:13px;color:#7a5c00;margin-bottom:20px;line-height:1.5;}
+  .grid-scroll{overflow-x:auto;}
+  .eval-grid{width:100%;border-collapse:collapse;min-width:800px;}
+  .eval-grid th{padding:10px 8px;border-bottom:2px solid var(--border);vertical-align:bottom;}
+  .th-question{text-align:left;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--soft);letter-spacing:0.8px;text-transform:uppercase;width:260px;padding-right:16px;}
+  .th-person{text-align:center;min-width:110px;}
+  .th-person-name{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--dark);display:block;}
+  .th-person-role{font-size:10px;color:var(--soft);display:block;margin-top:2px;}
+  .th-person-new{font-size:9px;color:#7a5c00;background:#fff3cd;border-radius:4px;padding:1px 5px;display:inline-block;margin-top:3px;}
+  .eval-grid td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  .eval-grid tr:hover td{background:var(--green-pale);}
+  .question-number{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px;margin-bottom:3px;}
+  .question-number.pot{color:#7b2d8b;}
+  .question-text{font-size:12.5px;line-height:1.4;color:var(--dark);}
+  .section-divider td{background:var(--green-pale) !important;padding:7px 12px !important;}
+  .section-divider-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green);}
+  .section-divider-pot td{background:#f5eafa !important;padding:7px 12px !important;}
+  .section-divider-pot .section-divider-label{color:#7b2d8b;}
+  .resp-select{display:flex;flex-direction:column;gap:3px;align-items:center;}
+  .resp-opt{width:105px;padding:4px 5px;border-radius:5px;border:1.5px solid var(--border);background:white;font-size:10px;font-weight:700;cursor:pointer;transition:all 0.12s;color:var(--mid);text-align:center;font-family:'Lato',sans-serif;}
+  .resp-opt:hover{border-color:var(--green);}
+  .resp-opt.sel-c{background:#d4edda;border-color:#28a745;color:#155724;}
+  .resp-opt.sel-d{background:#d1ecf1;border-color:#17a2b8;color:#0c5460;}
+  .resp-opt.sel-p{background:#fff3cd;border-color:#ffc107;color:#856404;}
+  .resp-opt.sel-n{background:#f8d7da;border-color:#dc3545;color:#721c24;}
+  .submit-area{text-align:center;padding:28px 0 12px;}
+  .submit-btn{background:var(--green);color:white;border:none;padding:13px 36px;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(26,124,62,0.3);}
+  .submit-btn:hover{background:var(--green-mid);transform:translateY(-1px);}
+  .results-header{background:linear-gradient(135deg,var(--green) 0%,#0f4d28 100%);border-radius:16px;padding:32px 40px;color:white;margin-bottom:28px;text-align:center;}
+  .results-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:6px;}
+  .results-sub{font-size:13px;opacity:0.8;}
+  .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:28px;}
+  .result-card{background:white;border-radius:13px;box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;}
+  .result-card-top{padding:14px 16px 10px;border-bottom:1px solid var(--border);}
+  .result-person-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:2px;}
+  .result-person-role{font-size:11px;color:var(--soft);}
+  .result-card-bottom{padding:12px 16px;display:flex;align-items:center;gap:10px;}
+  .result-box-number{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:white;flex-shrink:0;}
+  .result-box-label{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--dark);}
+  .result-axes{font-size:11px;color:var(--soft);margin-top:3px;}
+  .result-score-detail{font-size:10px;color:var(--soft);margin-top:2px;}
+  .result-new-badge{background:#fff3cd;border:1px solid var(--gold);color:#7a5c00;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-top:4px;display:inline-block;}
+  @media(max-width:700px){.header{padding:0 16px;}.progress-wrap{padding:0 16px 14px;}.main{padding:20px 12px 40px;}.intro-box{padding:22px 20px;}.card-body{padding:16px;}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-brand">
     <div class="isp-logo">Regional<br><span>Learning Team</span></div>
@@ -175,12 +123,10 @@
     <div class="progress-step active" id="ps1"></div>
     <div class="progress-step" id="ps2"></div>
     <div class="progress-step" id="ps3"></div>
-    <div class="progress-step" id="ps4"></div>
   </div>
   <div class="progress-label" id="progress-label">Selecciona tu colegio para comenzar</div>
 </div>
 
-<!-- SCHOOL SELECTION -->
 <div id="school-select-screen">
   <div class="school-select-screen">
     <div class="select-hero">
@@ -197,80 +143,51 @@
   </div>
 </div>
 
-<!-- FORM SCREEN -->
 <div id="form-screen" style="display:none;">
   <div class="main">
     <button class="back-btn" onclick="goBack()">← Cambiar colegio</button>
     <div class="intro-box">
       <div class="intro-school" id="form-school-name"></div>
-      <div style="font-size:14px;opacity:0.85;line-height:1.6;max-width:580px;" id="form-school-desc"></div>
+      <div class="intro-desc" id="form-school-desc"></div>
       <div class="intro-meta" id="form-school-meta"></div>
     </div>
-
     <div class="card">
       <div class="card-header">
         <div class="card-step">1</div>
         <div>
           <div class="card-title" id="step1-title">Contexto del equipo</div>
-          <div class="card-subtitle" id="step1-sub">Indica si algún miembro lleva menos de 12 meses en su rol actual</div>
+          <div class="card-subtitle" id="step1-sub">Indica si algún miembro lleva 6 meses o menos en su rol actual</div>
         </div>
       </div>
       <div class="card-body">
+        <div class="context-note" id="context-note"></div>
         <table class="context-table">
           <thead><tr>
             <th id="th-person-label" style="width:50%">Persona</th>
-            <th id="th-months-label">¿Menos de 12 meses en el rol?</th>
+            <th id="th-months-label">¿6 meses o menos en el rol?</th>
           </tr></thead>
           <tbody id="context-tbody"></tbody>
         </table>
       </div>
     </div>
-
     <div class="card">
       <div class="card-header">
         <div class="card-step">2</div>
         <div>
           <div class="card-title" id="step2-title">Evaluación del equipo</div>
-          <div class="card-subtitle" id="step2-sub">Responde cada pregunta para todos los miembros de tu equipo</div>
+          <div class="card-subtitle" id="step2-sub">Responde cada pregunta para todos los miembros · El resultado se calculará automáticamente</div>
         </div>
       </div>
       <div class="card-body">
-        <div class="grid-note" id="grid-note">
-          💡 <strong>Escala de respuesta:</strong> &nbsp;
-          <span style="background:#d4edda;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#155724;">Consistentemente</span> &nbsp;
-          <span style="background:#d1ecf1;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#0c5460;">En desarrollo</span> &nbsp;
-          <span style="background:#fff3cd;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#856404;">Parcialmente</span> &nbsp;
-          <span style="background:#f8d7da;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#721c24;">Aún no</span>
-        </div>
+        <div class="grid-note" id="grid-note"></div>
         <div class="grid-scroll">
           <table class="eval-grid">
-            <thead><tr id="eval-header-row"><th class="th-question" id="th-question-label">Pregunta</th></tr></thead>
+            <thead><tr id="eval-header-row"><th class="th-question">Pregunta</th></tr></thead>
             <tbody id="eval-tbody"></tbody>
           </table>
         </div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-step">3</div>
-        <div>
-          <div class="card-title" id="step3-title">Valoración final</div>
-          <div class="card-subtitle" id="step3-sub">Considerando todo lo anterior, indica tu valoración global para cada persona</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <table class="closing-grid">
-          <thead><tr>
-            <th id="th-closing-person" style="width:30%">Persona</th>
-            <th id="th-closing-perf">Rendimiento actual</th>
-            <th id="th-closing-pot">Potencial de crecimiento</th>
-          </tr></thead>
-          <tbody id="closing-tbody"></tbody>
-        </table>
-      </div>
-    </div>
-
     <div class="submit-area">
       <div style="font-size:13px;color:var(--soft);margin-bottom:16px;" id="submit-note">Al enviar, verás los resultados de tu equipo con su ubicación en la matriz OMR.</div>
       <button class="submit-btn" onclick="showResults()" id="submit-btn">Ver resultados del equipo →</button>
@@ -278,57 +195,77 @@
   </div>
 </div>
 
-<!-- RESULTS SCREEN -->
 <div id="results-screen" style="display:none;">
   <div class="main">
     <div class="results-header">
-      <div class="results-title" id="results-title">Resultados</div>
-      <div class="results-sub" id="results-sub">Evaluación OMR 2026 · Equipo de Liderazgo</div>
+      <div class="results-title" id="results-title"></div>
+      <div class="results-sub" id="results-sub"></div>
     </div>
     <div class="results-grid" id="results-grid"></div>
-
     <div class="card">
       <div class="card-header">
         <div class="card-step" style="background:var(--green);">↗</div>
         <div>
           <div class="card-title" id="ninebox-title">Distribución en la Matriz 9-Box</div>
-          <div class="card-subtitle" id="ninebox-sub">Ubicación de cada miembro del equipo</div>
+          <div class="card-subtitle" id="ninebox-sub">Ubicación de cada miembro del equipo basada en tus respuestas</div>
         </div>
       </div>
       <div class="card-body">
         <div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;">
           <div>
             <div style="display:flex;align-items:flex-start;gap:8px;">
-              <div style="display:flex;flex-direction:column;justify-content:space-between;height:228px;padding:4px 0;margin-right:4px;">
-                <div style="font-size:10px;color:var(--soft);text-align:right;">Alto</div>
-                <div style="font-size:10px;color:var(--soft);text-align:right;">Bueno</div>
-                <div style="font-size:10px;color:var(--soft);text-align:right;">Limitado</div>
+              <div style="display:flex;flex-direction:column;justify-content:space-between;height:228px;padding:4px 0;margin-right:4px;text-align:right;">
+                <div style="font-size:10px;color:var(--soft);" id="lbl-alto">Alto</div>
+                <div style="font-size:10px;color:var(--soft);" id="lbl-bueno">Bueno</div>
+                <div style="font-size:10px;color:var(--soft);" id="lbl-limitado">Limitado</div>
               </div>
               <div>
                 <div style="font-size:10px;color:var(--soft);margin-bottom:4px;margin-left:4px;letter-spacing:1px;font-weight:700;" id="pot-label">POTENCIAL ↑</div>
                 <div id="ninebox-grid" style="display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);gap:4px;"></div>
                 <div style="display:flex;justify-content:space-between;margin-top:6px;padding:0 2px;">
-                  <div style="font-size:10px;color:var(--soft);" id="lim-label">Limitado</div>
-                  <div style="font-size:10px;color:var(--soft);" id="bue-label">Bueno</div>
-                  <div style="font-size:10px;color:var(--soft);" id="alt-label">Alto</div>
+                  <div style="font-size:10px;color:var(--soft);">Limitado</div>
+                  <div style="font-size:10px;color:var(--soft);">Bueno</div>
+                  <div style="font-size:10px;color:var(--soft);">Alto</div>
                 </div>
-                <div style="text-align:center;font-size:10px;color:var(--soft);letter-spacing:1px;font-weight:700;margin-top:2px;" id="perf-label">RENDIMIENTO →</div>
+                <div style="text-align:center;font-size:10px;color:var(--soft);letter-spacing:1px;font-weight:700;margin-top:2px;" id="desemp-label">DESEMPEÑO →</div>
               </div>
             </div>
           </div>
-          <div style="flex:1;min-width:180px;" id="box-legend"></div>
+          <div style="flex:1;min-width:200px;" id="box-legend"></div>
         </div>
       </div>
     </div>
-
+    <div class="card">
+      <div class="card-header">
+        <div class="card-step" style="background:#5c6bc0;">%</div>
+        <div>
+          <div class="card-title" style="color:#3949ab;">Cómo se calculó el resultado</div>
+          <div class="card-subtitle">Lógica de puntuación basada en los descriptores OMR</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="font-size:13px;color:var(--mid);line-height:1.8;margin-bottom:16px;" id="score-scale-note"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px;">
+          <div style="background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:14px;">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--green);margin-bottom:8px;">📊 Bloque Desempeño (P1–P5)</div>
+            <div>Máximo: 15 puntos<br><br>0–4 → <strong>Limitado</strong><br>5–9 → <strong>Bueno</strong><br>10–15 → <strong>Alto</strong></div>
+          </div>
+          <div style="background:#f5eafa;border:1px solid #d7b9f5;border-radius:10px;padding:14px;">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;color:#7b2d8b;margin-bottom:8px;">🚀 Bloque Potencial (P6–P11)</div>
+            <div>Máximo: 18 puntos<br><br>0–5 → <strong>Limitado</strong><br>6–11 → <strong>Bueno</strong><br>12–18 → <strong>Alto</strong></div>
+          </div>
+        </div>
+        <div style="margin-top:14px;font-size:12px;color:var(--soft);line-height:1.6;">⚠️ Las personas con <strong>6 meses o menos en el rol</strong> se ubican automáticamente en la <strong>Casilla 1</strong> independientemente del puntaje.</div>
+        <div id="score-detail-table" style="margin-top:20px;"></div>
+      </div>
+    </div>
     <div style="background:#f0f7f3;border:1px solid var(--green-border);border-radius:14px;padding:20px 26px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <div style="flex:1;min-width:200px;">
-        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--green);margin-bottom:6px;" id="pdf-send-label">📧 Siguiente paso — enviar resultados</div>
-        <div style="font-size:13px;color:var(--mid);line-height:1.6;" id="pdf-send-desc">Descarga el PDF con los resultados y envíalo a:<br><strong style="font-size:14px;color:var(--dark);">sandrade@ispschools.com</strong></div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--green);margin-bottom:6px;">📧 Siguiente paso — enviar resultados</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.6;" id="pdf-desc">Descarga el PDF con los resultados y envíalo a:<br><strong style="font-size:14px;color:var(--dark);">sandrade@ispschools.com</strong></div>
       </div>
       <button onclick="downloadPDF()" style="background:var(--green);color:white;border:none;padding:12px 28px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(26,124,62,0.25);white-space:nowrap;" id="pdf-btn">⬇ Descargar PDF</button>
     </div>
-
     <div style="text-align:center;padding-bottom:16px;">
       <button onclick="goBack()" style="background:white;border:2px solid var(--border);color:var(--soft);padding:10px 22px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;">← Volver al inicio</button>
     </div>
@@ -336,557 +273,395 @@
 </div>
 
 <script>
-// ─── ALL SCHOOLS DATA ────────────────────────────────────────────────
-const schools = {
-  "LP - Samborondón": {
-    lang: "es",
-    team: [
-      { name: "Patricia Ayala", role: "Head of School" },
-      { name: "Maria de los Angeles Chavez", role: "Head of Learning" },
-      { name: "Jalime Buchamar", role: "Directora Preescolar" },
-      { name: "Fabiola Cordero", role: "Directora Primaria" },
-      { name: "Claudia Pérez", role: "Coordinadora MYP" },
-      { name: "Erika Arguello", role: "Coordinadora PYP" },
-      { name: "Ingrid Veintimilla", role: "Multilingualism Lead" },
-    ]
-  },
-  "La Moderna": {
-    lang: "es",
-    team: [
-      { name: "Patricio Torres", role: "Head of School" },
-      { name: "Virginia Lozada", role: "Head of Learning" },
-      { name: "Luisi Villacreces", role: "Head of Early Years" },
-      { name: "Maria Isabel Yerovi", role: "Head of Primary/Elementary" },
-      { name: "Alexandra Alexandre", role: "Head of Secondary" },
-      { name: "Gisela Escala", role: "AA Lead" },
-      { name: "Kattya Rizzo", role: "Schilos" },
-    ]
-  },
-  "Centenario": {
-    lang: "es",
-    team: [
-      { name: "Mariuxi Velarde", role: "Head of School" },
-      { name: "Eddna Peñafiel", role: "Deputy Principal" },
-      { name: "Denisse Ruiz", role: "Head of Secondary" },
-      { name: "Patricia Medina", role: "Head of Early Years" },
-      { name: "Nancy Rodríguez", role: "IB Coordinator" },
-      { name: "M° de los Ángeles Mendoza", role: "IB Coordinator" },
-      { name: "Narcisa Bueno", role: "Multilingualism Lead" },
-    ]
-  },
-  "Terranova": {
-    lang: "es",
-    team: [
-      { name: "Enrique Pérez", role: "Head of School" },
-      { name: "José Ignacio Anangonó", role: "Head of Secondary" },
-      { name: "Daniela Valdez", role: "Head of Primary/Elementary" },
-      { name: "Lucía Donoso", role: "Head of Early Years" },
-      { name: "Martín Fernández", role: "Head of Learning" },
-      { name: "Gabriela Proaño", role: "DP+MYP Coordinator" },
-      { name: "Teresa Cedeño", role: "PYP Coordinator" },
-      { name: "Yohaina Younes", role: "LabSchool Coordinator" },
-    ]
-  },
-  "La Colina": {
-    lang: "en",
-    team: [
-      { name: "John Hickey", role: "Head of School" },
-      { name: "Duván Florian", role: "Head of Learning" },
-      { name: "Arney Rodríguez", role: "Head of Secondary" },
-      { name: "Carolina Campo", role: "Head of Primary/Elementary" },
-      { name: "Heidy Palacio", role: "Head of Early Years" },
-      { name: "Luis Miguel de la Cruz", role: "Subject Leader" },
-      { name: "Norma Valencia", role: "Curriculum Coordinator" },
-      { name: "Oscar Cardenas", role: "Multilingualism Lead" },
-      { name: "Mary Martinez", role: "LC Leader" },
-    ]
-  },
-  "Agustinas": {
-    lang: "es",
-    team: [
-      { name: "Sara Brito", role: "Head of School" },
-      { name: "Carolina Garrido", role: "Head of Primary/Elementary" },
-      { name: "Daniela Olivares", role: "Head of Middle School & Edtech" },
-      { name: "Rosa Roldán", role: "Head of Secondary" },
-      { name: "Josefina Palma", role: "Head of Early Years" },
-      { name: "Andrea Venegas", role: "Directora de Formación & LC" },
-      { name: "Constanza Cares", role: "SCHILOS" },
-      { name: "Patricio Villagra", role: "Future Pathways" },
-      { name: "Jenniffer Becerra", role: "Multilingualism Lead" },
-    ]
-  },
-  "Las Condes": {
-    lang: "es",
-    team: [
-      { name: "Soledad Villate", role: "Head of School" },
-      { name: "Valeria Hurtado", role: "Head of Primary/Elementary" },
-      { name: "Gabriela Kenrick", role: "Head of Middle School" },
-      { name: "Catherine León", role: "Head of Early Years" },
-      { name: "Isabel Pinto", role: "Deputy Principal" },
-      { name: "Jorge Avila", role: "Head of Secondary" },
-      { name: "Carlos Mora", role: "Edtech & SCHILOS" },
-      { name: "Mariana Boltón", role: "ML Leader" },
-    ]
-  },
-  "Peñalolén": {
-    lang: "es",
-    team: [
-      { name: "Jose Luis Aviles", role: "Head of School" },
-      { name: "Pilar Bisso", role: "Head Pastoral" },
-      { name: "Enzo Saldías", role: "Head of Secondary" },
-      { name: "Claudia Inostroza", role: "Deputy Head of Learning" },
-      { name: "Liliana Henriquez", role: "Deputy Head of Learning" },
-      { name: "Andrea Vega", role: "Deputy Head Pastoral" },
-      { name: "Gloria Henriquez", role: "Deputy Head Pastoral" },
-      { name: "Paula Astorquiza", role: "Head of Early Years" },
-      { name: "Pamela Campos", role: "Life Competencies Lead" },
-      { name: "Daniela Von Marees", role: "Head of Primary/Elementary" },
-      { name: "Diego Aldana", role: "Multilingualism Lead" },
-      { name: "Catalina Pizarro", role: "Dirección Académica" },
-    ]
-  },
-  "Providencia": {
-    lang: "es",
-    team: [
-      { name: "Maria Teresa Villa Rodríguez", role: "Head of School" },
-      { name: "Melania García", role: "Head of Early Years" },
-      { name: "Carla López", role: "Life Competencies Lead / Directora de Convivencia" },
-      { name: "Katherine Toro", role: "Head of Primary/Elementary" },
-      { name: "Ximena Eliana Perez De Arce", role: "Head of Secondary" },
-      { name: "Leslie Araya", role: "Head of Middle School" },
-      { name: "Giovanna Molina", role: "Subject Leader / Head of Learning (ML Lead)" },
-    ]
-  },
-  "BRS": {
-    lang: "es",
-    team: [
-      { name: "Carmen Vera", role: "Head of School" },
-      { name: "Carol Herrera", role: "Head of Early Years" },
-      { name: "María José Herrera", role: "Head of Middle School" },
-      { name: "Francisca Tapia", role: "Head of Primary/Elementary" },
-      { name: "Carolina Durán", role: "Deputy Principal" },
-      { name: "Catalina Balic", role: "Subject Leader" },
-      { name: "Marta García", role: "Subject Leader" },
-      { name: "María José Ossa", role: "Multilingualism Lead" },
-    ]
-  },
-  "SGC": {
-    lang: "en",
-    team: [
-      { name: "Simon Porter", role: "Head of School" },
-      { name: "Lucy Castañon", role: "Head of Primary/Elementary" },
-      { name: "Luis Sifuentes", role: "Head of Secondary" },
-      { name: "Ursula Alarco", role: "Head of Early Years" },
-      { name: "Veronica Saenz", role: "Head of Middle School" },
-      { name: "Williams Roger Amaya Pelaez", role: "Deputy Principal" },
-      { name: "Diego Requejo", role: "Subject Leader" },
-      { name: "José Carlos Kovaleff", role: "IB Coordinator" },
-    ]
-  }
+const schools={
+  "LP - Samborondón":{lang:"es",team:[
+    {name:"Maria de los Angeles Chavez",role:"Head of Learning"},
+    {name:"Jalime Buchamar",role:"Directora Preescolar"},
+    {name:"Fabiola Cordero",role:"Directora Primaria"},
+    {name:"Claudia Pérez",role:"Coordinadora MYP"},
+    {name:"Erika Arguello",role:"Coordinadora PYP"},
+    {name:"Ingrid Veintimilla",role:"Multilingualism Lead"},
+  ]},
+  "La Moderna":{lang:"es",team:[
+    {name:"Virginia Lozada",role:"Head of Learning"},
+    {name:"Luisi Villacreces",role:"Head of Early Years"},
+    {name:"Maria Isabel Yerovi",role:"Head of Primary/Elementary"},
+    {name:"Alexandra Alexandre",role:"Head of Secondary"},
+    {name:"Gisela Escala",role:"AA Lead"},
+    {name:"Kattya Rizzo",role:"Schilos"},
+  ]},
+  "Centenario":{lang:"es",team:[
+    {name:"Eddna Peñafiel",role:"Deputy Principal"},
+    {name:"Denisse Ruiz",role:"Head of Secondary"},
+    {name:"Patricia Medina",role:"Head of Early Years"},
+    {name:"Nancy Rodríguez",role:"IB Coordinator"},
+    {name:"M° de los Ángeles Mendoza",role:"IB Coordinator"},
+    {name:"Narcisa Bueno",role:"Multilingualism Lead"},
+  ]},
+  "Terranova":{lang:"es",team:[
+    {name:"José Ignacio Anangonó",role:"Head of Secondary"},
+    {name:"Daniela Valdez",role:"Head of Primary/Elementary"},
+    {name:"Lucía Donoso",role:"Head of Early Years"},
+    {name:"Martín Fernández",role:"Head of Learning"},
+    {name:"Gabriela Proaño",role:"DP+MYP Coordinator"},
+    {name:"Teresa Cedeño",role:"PYP Coordinator"},
+    {name:"Yohaina Younes",role:"LabSchool Coordinator"},
+  ]},
+  "La Colina":{lang:"en",team:[
+    {name:"Duván Florian",role:"Head of Learning"},
+    {name:"Arney Rodríguez",role:"Head of Secondary"},
+    {name:"Carolina Campo",role:"Head of Primary/Elementary"},
+    {name:"Heidy Palacio",role:"Head of Early Years"},
+    {name:"Luis Miguel de la Cruz",role:"Subject Leader"},
+    {name:"Norma Valencia",role:"Curriculum Coordinator"},
+    {name:"Oscar Cardenas",role:"Multilingualism Lead"},
+    {name:"Mary Martinez",role:"LC Leader"},
+  ]},
+  "Agustinas":{lang:"es",team:[
+    {name:"Carolina Garrido",role:"Head of Primary/Elementary"},
+    {name:"Daniela Olivares",role:"Head of Middle School & Edtech"},
+    {name:"Rosa Roldán",role:"Head of Secondary"},
+    {name:"Josefina Palma",role:"Head of Early Years"},
+    {name:"Andrea Venegas",role:"Directora de Formación & LC"},
+    {name:"Constanza Cares",role:"SCHILOS"},
+    {name:"Patricio Villagra",role:"Future Pathways"},
+    {name:"Jenniffer Becerra",role:"Multilingualism Lead"},
+  ]},
+  "Las Condes":{lang:"es",team:[
+    {name:"Valeria Hurtado",role:"Head of Primary/Elementary"},
+    {name:"Gabriela Kenrick",role:"Head of Middle School"},
+    {name:"Catherine León",role:"Head of Early Years"},
+    {name:"Isabel Pinto",role:"Deputy Principal"},
+    {name:"Jorge Avila",role:"Head of Secondary"},
+    {name:"Carlos Mora",role:"Edtech & SCHILOS"},
+    {name:"Mariana Boltón",role:"ML Leader"},
+  ]},
+  "Peñalolén":{lang:"es",team:[
+    {name:"Pilar Bisso",role:"Head Pastoral"},
+    {name:"Enzo Saldías",role:"Head of Secondary"},
+    {name:"Claudia Inostroza",role:"Deputy Head of Learning"},
+    {name:"Liliana Henriquez",role:"Deputy Head of Learning"},
+    {name:"Andrea Vega",role:"Deputy Head Pastoral"},
+    {name:"Gloria Henriquez",role:"Deputy Head Pastoral"},
+    {name:"Paula Astorquiza",role:"Head of Early Years"},
+    {name:"Pamela Campos",role:"Life Competencies Lead"},
+    {name:"Daniela Von Marees",role:"Head of Primary/Elementary"},
+    {name:"Diego Aldana",role:"Multilingualism Lead"},
+    {name:"Catalina Pizarro",role:"Dirección Académica"},
+  ]},
+  "Providencia":{lang:"es",team:[
+    {name:"Melania García",role:"Head of Early Years"},
+    {name:"Carla López",role:"Life Competencies Lead / Directora de Convivencia"},
+    {name:"Katherine Toro",role:"Head of Primary/Elementary"},
+    {name:"Ximena Eliana Perez De Arce",role:"Head of Secondary"},
+    {name:"Leslie Araya",role:"Head of Middle School"},
+    {name:"Giovanna Molina",role:"Subject Leader / Head of Learning (ML Lead)"},
+  ]},
+  "BRS":{lang:"es",team:[
+    {name:"Carol Herrera",role:"Head of Early Years"},
+    {name:"María José Herrera",role:"Head of Middle School"},
+    {name:"Francisca Tapia",role:"Head of Primary/Elementary"},
+    {name:"Carolina Durán",role:"Deputy Principal"},
+    {name:"Catalina Balic",role:"Subject Leader"},
+    {name:"Marta García",role:"Subject Leader"},
+    {name:"María José Ossa",role:"Multilingualism Lead"},
+  ]},
+  "SGC":{lang:"en",team:[
+    {name:"Lucy Castañon",role:"Head of Primary/Elementary"},
+    {name:"Luis Sifuentes",role:"Head of Secondary"},
+    {name:"Ursula Alarco",role:"Head of Early Years"},
+    {name:"Veronica Saenz",role:"Head of Middle School"},
+    {name:"Williams Roger Amaya Pelaez",role:"Deputy Principal"},
+    {name:"Diego Requejo",role:"Subject Leader"},
+    {name:"José Carlos Kovaleff",role:"IB Coordinator"},
+  ]},
 };
 
-// ─── QUESTIONS ───────────────────────────────────────────────────────
-const questionsES = [
-  { id:"q1", block:"perf", text:"Los resultados académicos del colegio muestran progreso medible respecto al año anterior" },
-  { id:"q2", block:"perf", text:"Los Progress Tests se usan activamente para diseñar intervenciones con los estudiantes" },
-  { id:"q3", block:"perf", text:"Las Learning Visits reflejan práctica de alto impacto de forma regular en el colegio" },
-  { id:"q4", block:"perf", text:"El LIP está claramente conectado con las prioridades académicas y se usa para tomar decisiones" },
-  { id:"q5", block:"perf", text:"El Roadmap está integrado en la planificación académica y guía la mejora del colegio" },
-  { id:"q6", block:"pot", text:"Esta persona toma iniciativas que van más allá de lo que se le pide en su rol" },
-  { id:"q7", block:"pot", text:"Aprende rápido, incorpora feedback y ajusta su práctica con agilidad" },
-  { id:"q8", block:"pot", text:"Tiene influencia positiva sobre otros líderes dentro o fuera del colegio" },
-  { id:"q9", block:"pot", text:"Podría asumir un rol de mayor escala o responsabilidad en los próximos 12–24 meses" },
-  { id:"q10", block:"pot", text:"Genera confianza y credibilidad con su equipo, familias y la red ISP" },
+const questionsES=[
+  {id:"q1",block:"desemp",text:"Los resultados académicos del colegio muestran progreso medible respecto al año anterior"},
+  {id:"q2",block:"desemp",text:"Los Progress Tests se usan activamente para diseñar intervenciones con los estudiantes"},
+  {id:"q3",block:"desemp",text:"Las Learning Visits reflejan práctica de alto impacto de forma regular en el colegio"},
+  {id:"q4",block:"desemp",text:"El LIP está claramente conectado con las prioridades académicas y se usa para tomar decisiones"},
+  {id:"q5",block:"desemp",text:"El Roadmap está integrado en la planificación académica y guía la mejora del colegio"},
+  {id:"q6",block:"pot",text:"Esta persona toma iniciativas que van más allá de lo que se le pide en su rol"},
+  {id:"q7",block:"pot",text:"Aprende rápido, incorpora feedback y ajusta su práctica con agilidad"},
+  {id:"q8",block:"pot",text:"Tiene influencia positiva sobre otros líderes dentro o fuera del colegio"},
+  {id:"q9",block:"pot",text:"Podría asumir un rol de mayor escala o responsabilidad en los próximos 12–24 meses"},
+  {id:"q10",block:"pot",text:"Genera confianza y credibilidad con su equipo, familias y la red ISP"},
+  {id:"q11",block:"pot",text:"Aplica en su práctica los aprendizajes de los cursos y capacitaciones que ha completado"},
 ];
-
-const questionsEN = [
-  { id:"q1", block:"perf", text:"The school's academic results show measurable progress compared to last year" },
-  { id:"q2", block:"perf", text:"Progress Tests are actively used to design interventions for students" },
-  { id:"q3", block:"perf", text:"Learning Visits consistently reflect high-impact practice across the school" },
-  { id:"q4", block:"perf", text:"The LIP is clearly connected to academic priorities and used to inform decisions" },
-  { id:"q5", block:"perf", text:"The Roadmap is embedded in academic planning and drives school improvement" },
-  { id:"q6", block:"pot", text:"This person takes initiatives beyond what is expected in their role" },
-  { id:"q7", block:"pot", text:"They learn quickly, incorporate feedback and adapt their practice with agility" },
-  { id:"q8", block:"pot", text:"They have a positive influence on other leaders within or beyond the school" },
-  { id:"q9", block:"pot", text:"They could take on a role of greater scale or responsibility in the next 12–24 months" },
-  { id:"q10", block:"pot", text:"They generate trust and credibility with their team, families and the ISP network" },
+const questionsEN=[
+  {id:"q1",block:"desemp",text:"The school's academic results show measurable progress compared to last year"},
+  {id:"q2",block:"desemp",text:"Progress Tests are actively used to design interventions for students"},
+  {id:"q3",block:"desemp",text:"Learning Visits consistently reflect high-impact practice across the school"},
+  {id:"q4",block:"desemp",text:"The LIP is clearly connected to academic priorities and used to inform decisions"},
+  {id:"q5",block:"desemp",text:"The Roadmap is embedded in academic planning and drives school improvement"},
+  {id:"q6",block:"pot",text:"This person takes initiatives beyond what is expected in their role"},
+  {id:"q7",block:"pot",text:"They learn quickly, incorporate feedback and adapt their practice with agility"},
+  {id:"q8",block:"pot",text:"They have a positive influence on other leaders within or beyond the school"},
+  {id:"q9",block:"pot",text:"They could take on a role of greater scale or responsibility in the next 12–24 months"},
+  {id:"q10",block:"pot",text:"They generate trust and credibility with their team, families and the ISP network"},
+  {id:"q11",block:"pot",text:"They apply learnings from completed courses and training in their daily practice"},
 ];
+const scaleES=["Consistentemente","En desarrollo","Parcialmente","Aún no"];
+const scaleEN=["Consistently","Developing","Partially","Not yet"];
+const scaleVals=["c","d","p","n"];
+const scoreMap={c:3,d:2,p:1,n:0};
+const boxColors={1:"#f39c12",2:"#f39c12",3:"#2980b9",4:"#f39c12",5:"#27ae60",6:"#2980b9",7:"#c0392b",8:"#27ae60",9:"#27ae60"};
+const boxLabelsES={1:"Nuevo en rol · Potencial por confirmar",2:"Estrella en desarrollo",3:"Sucesor designado",4:"Dilema de potencial",5:"Desempeño estable y confiable",6:"Alto desempeño consistente",7:"Requiere mejora urgente",8:"Buen desempeño, potencial limitado",9:"Experto / Especialista clave"};
+const boxLabelsEN={1:"New in role · Potential to confirm",2:"Developing star",3:"Designated successor",4:"Potential dilemma",5:"Stable and reliable performer",6:"Consistently high performer",7:"Urgent improvement needed",8:"Good performer, limited potential",9:"Expert / Key specialist"};
+const boxDescES={1:"Nuevo en el rol — necesita onboarding claro y KPIs definidos. Se moverá a medida que su desempeño se consolide.",2:"Buen desempeño con alto potencial. Candidato a sucesor — requiere coaching para llevar su desempeño a Alto.",3:"Excelente contribución en todas las áreas. Listo para un nuevo desafío. Retención crítica — futuros líderes.",4:"Muestra potencial pero desempeño bajo. Explorar razones y acordar acciones concretas de mejora.",5:"Desempeño consistente y confiable. Columna vertebral del equipo. Potencial para mayor responsabilidad.",6:"Alto desempeño con potencial adicional. Candidato a movimiento lateral o sucesor.",7:"No cumple expectativas y potencial limitado. Requiere PIP inmediato.",8:"Buen desempeño pero potencial limitado para crecer más. Foco en motivación y retención.",9:"Alto desempeño sostenido — experto en su área. Foco en engagement y retención."};
+const boxDescEN={1:"New in role — needs clear onboarding and KPIs. Will move as performance consolidates.",2:"Good performance with high potential. Successor candidate — needs coaching to reach High performance.",3:"Excellent contribution in all areas. Ready for a new challenge. Critical retention — future leaders.",4:"Shows potential but performance is low. Explore reasons and agree on concrete improvement actions.",5:"Consistent and reliable performer. Backbone of the team. Potential for greater responsibility.",6:"High performance with additional potential. Candidate for lateral move or successor role.",7:"Not meeting expectations and limited potential. Requires immediate PIP.",8:"Good performance but limited potential to grow further. Focus on motivation and retention.",9:"Sustained high performance — expert in their area. Focus on engagement and retention."};
 
-const scaleES = ["Consistentemente","En desarrollo","Parcialmente","Aún no"];
-const scaleEN = ["Consistently","Developing","Partially","Not yet"];
-const scaleVals = ["c","d","p","n"];
+let currentSchool=null,currentLang="es",currentTeam=[];
+let responses={},context={};
 
-const boxLabelsES = {
-  1:"Nuevo / Inicio · Alto potencial", 2:"Estrella en desarrollo", 3:"Sucesor designado",
-  4:"Dilema de potencial", 5:"Buen desempeño estable", 6:"Alto rendimiento consistente",
-  7:"Requiere mejora urgente", 8:"Buen desempeño, potencial en desarrollo", 9:"Experto / Especialista clave"
-};
-const boxLabelsEN = {
-  1:"New / Starting · High potential", 2:"Developing star", 3:"Designated successor",
-  4:"Potential dilemma", 5:"Stable good performer", 6:"Consistently high performer",
-  7:"Urgent improvement needed", 8:"Good performer, developing potential", 9:"Expert / Key specialist"
-};
-const boxColors = {
-  1:"#f39c12",2:"#f39c12",3:"#2980b9",
-  4:"#f39c12",5:"#27ae60",6:"#2980b9",
-  7:"#c0392b",8:"#27ae60",9:"#27ae60"
-};
-
-// ─── STATE ───────────────────────────────────────────────────────────
-let currentSchool = null;
-let currentLang = "es";
-let currentTeam = [];
-let responses = {};
-let context = {};
-let closing = {};
-
-// ─── SCHOOL SELECTOR ─────────────────────────────────────────────────
-function initSchoolSelector() {
-  const grid = document.getElementById('school-grid');
-  grid.innerHTML = '';
-  Object.keys(schools).forEach(name => {
-    const s = schools[name];
-    const btn = document.createElement('button');
-    btn.className = 'school-btn';
-    btn.innerHTML = `<div class="school-btn-name">${name}</div><div class="school-btn-count">${s.team.length} personas en el equipo</div>`;
-    btn.onclick = () => loadSchool(name);
+function initSchoolSelector(){
+  const grid=document.getElementById('school-grid');
+  grid.innerHTML='';
+  Object.keys(schools).forEach(name=>{
+    const s=schools[name];
+    const btn=document.createElement('button');
+    btn.className='school-btn';
+    btn.innerHTML=`<div class="school-btn-name">${name}</div><div class="school-btn-count">${s.team.length} personas en el equipo</div>`;
+    btn.onclick=()=>loadSchool(name);
     grid.appendChild(btn);
   });
 }
 
-function loadSchool(name) {
-  currentSchool = name;
-  currentLang = schools[name].lang;
-  currentTeam = schools[name].team;
-  responses = {};
-  context = {};
-  closing = {};
-
-  document.getElementById('school-select-screen').style.display = 'none';
-  document.getElementById('form-screen').style.display = 'block';
-  document.getElementById('results-screen').style.display = 'none';
-  document.getElementById('ps1').className = 'progress-step done';
-  document.getElementById('ps2').className = 'progress-step active';
-  document.getElementById('progress-label').textContent = currentLang === 'en'
-    ? `Step 1 of 3 · Team context — ${name}`
-    : `Paso 1 de 3 · Contexto del equipo — ${name}`;
-
-  // Localise labels
-  const isEN = currentLang === 'en';
-  document.getElementById('form-school-name').textContent = name;
-  document.getElementById('form-school-desc').textContent = isEN
-    ? `This tool is a reflection space for your leadership team. There are no right or wrong answers — the goal is to structure your thinking before the OMR conversation. Results are a starting point and will be discussed with the Regional Director and Deputy Director of Learning in a 1:1 meeting.`
-    : `Esta herramienta es un espacio de reflexión sobre tu equipo de liderazgo. No hay respuestas correctas ni incorrectas — el objetivo es estructurar tu pensamiento antes de la conversación OMR. Los resultados serán conversados en una reunión 1:1 con la Directora y Subdirectora Regional de Aprendizaje.`;
-  document.getElementById('form-school-meta').innerHTML = `
-    <div class="intro-meta-item"><strong>${currentTeam.length}</strong>${isEN ? 'team members' : 'personas en el equipo'}</div>
-    <div class="intro-meta-item"><strong>3</strong>${isEN ? 'steps' : 'pasos'}</div>
-    <div class="intro-meta-item"><strong>~15 min</strong>${isEN ? 'estimated time' : 'tiempo estimado'}</div>`;
-
-  document.getElementById('step1-title').textContent = isEN ? 'Team context' : 'Contexto del equipo';
-  document.getElementById('step1-sub').textContent = isEN ? 'Indicate if any member has been in their current role for less than 12 months' : 'Indica si algún miembro lleva menos de 12 meses en su rol actual';
-  document.getElementById('th-person-label').textContent = isEN ? 'Person' : 'Persona';
-  document.getElementById('th-months-label').textContent = isEN ? 'Less than 12 months in role?' : '¿Menos de 12 meses en el rol?';
-  document.getElementById('step2-title').textContent = isEN ? 'Team evaluation' : 'Evaluación del equipo';
-  document.getElementById('step2-sub').textContent = isEN ? 'Answer each question for all members of your team' : 'Responde cada pregunta para todos los miembros de tu equipo';
-  document.getElementById('th-question-label').textContent = isEN ? 'Question' : 'Pregunta';
-  document.getElementById('step3-title').textContent = isEN ? 'Final assessment' : 'Valoración final';
-  document.getElementById('step3-sub').textContent = isEN ? 'Considering everything above, indicate your overall assessment for each person' : 'Considerando todo lo anterior, indica tu valoración global para cada persona';
-  document.getElementById('th-closing-person').textContent = isEN ? 'Person' : 'Persona';
-  document.getElementById('th-closing-perf').textContent = isEN ? 'Current performance' : 'Rendimiento actual';
-  document.getElementById('th-closing-pot').textContent = isEN ? 'Growth potential' : 'Potencial de crecimiento';
-  document.getElementById('submit-note').textContent = isEN ? 'When you submit, you will see your team\'s results with their position in the OMR matrix.' : 'Al enviar, verás los resultados de tu equipo con su ubicación en la matriz OMR.';
-  document.getElementById('submit-btn').textContent = isEN ? 'See team results →' : 'Ver resultados del equipo →';
-  document.getElementById('grid-note').innerHTML = isEN
-    ? `💡 <strong>Response scale:</strong> &nbsp;<span style="background:#d4edda;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#155724;">Consistently</span> &nbsp;<span style="background:#d1ecf1;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#0c5460;">Developing</span> &nbsp;<span style="background:#fff3cd;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#856404;">Partially</span> &nbsp;<span style="background:#f8d7da;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#721c24;">Not yet</span>`
-    : `💡 <strong>Escala de respuesta:</strong> &nbsp;<span style="background:#d4edda;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#155724;">Consistentemente</span> &nbsp;<span style="background:#d1ecf1;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#0c5460;">En desarrollo</span> &nbsp;<span style="background:#fff3cd;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#856404;">Parcialmente</span> &nbsp;<span style="background:#f8d7da;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#721c24;">Aún no</span>`;
-
-  buildForms();
-  window.scrollTo(0,0);
+function loadSchool(name){
+  currentSchool=name;currentLang=schools[name].lang;currentTeam=schools[name].team;
+  responses={};context={};
+  const isEN=currentLang==='en';
+  document.getElementById('school-select-screen').style.display='none';
+  document.getElementById('form-screen').style.display='block';
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('ps1').className='progress-step done';
+  document.getElementById('ps2').className='progress-step active';
+  document.getElementById('ps3').className='progress-step';
+  document.getElementById('progress-label').textContent=(isEN?'Step 1 of 2 · Team context — ':'Paso 1 de 2 · Contexto del equipo — ')+name;
+  document.getElementById('form-school-name').textContent=name;
+  document.getElementById('form-school-desc').textContent=isEN
+    ?"This tool is a reflection space for your leadership team. There are no right or wrong answers — the goal is to structure your thinking before the OMR conversation. Results are a starting point and will be discussed in a 1:1 meeting with the Regional Director and Deputy Director of Learning."
+    :"Esta herramienta es un espacio de reflexión sobre tu equipo de liderazgo. No hay respuestas correctas ni incorrectas — el objetivo es estructurar tu pensamiento antes de la conversación OMR. Los resultados serán conversados en una reunión 1:1 con la Directora y Subdirectora Regional de Aprendizaje.";
+  document.getElementById('form-school-meta').innerHTML=`<div class="intro-meta-item"><strong>${currentTeam.length}</strong>${isEN?'team members':'personas en el equipo'}</div><div class="intro-meta-item"><strong>2</strong>${isEN?'steps':'pasos'}</div><div class="intro-meta-item"><strong>~15 min</strong>${isEN?'estimated time':'tiempo estimado'}</div>`;
+  document.getElementById('context-note').innerHTML=isEN
+    ?'⚠️ <strong>Important:</strong> Members with <strong>6 months or less</strong> in the role will be automatically placed in <strong>Box 1</strong>. They will still be evaluated as a reflection exercise.'
+    :'⚠️ <strong>Importante:</strong> Los miembros con <strong>6 meses o menos</strong> en el rol serán ubicados automáticamente en la <strong>Casilla 1</strong>. Igual se les evaluará como ejercicio de reflexión.';
+  document.getElementById('th-person-label').textContent=isEN?'Person':'Persona';
+  document.getElementById('th-months-label').textContent=isEN?'6 months or less in role?':'¿6 meses o menos en el rol?';
+  document.getElementById('step2-title').textContent=isEN?'Team evaluation':'Evaluación del equipo';
+  document.getElementById('submit-note').textContent=isEN?'When you submit, you will see your team\'s results with their position in the OMR matrix.':'Al enviar, verás los resultados de tu equipo con su ubicación en la matriz OMR calculada a partir de tus respuestas.';
+  document.getElementById('submit-btn').textContent=isEN?'See team results →':'Ver resultados del equipo →';
+  document.getElementById('grid-note').innerHTML=isEN
+    ?`💡 <strong>Response scale:</strong> &nbsp;<span style="background:#d4edda;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#155724;">Consistently</span> &nbsp;<span style="background:#d1ecf1;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#0c5460;">Developing</span> &nbsp;<span style="background:#fff3cd;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#856404;">Partially</span> &nbsp;<span style="background:#f8d7da;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#721c24;">Not yet</span>`
+    :`💡 <strong>Escala de respuesta:</strong> &nbsp;<span style="background:#d4edda;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#155724;">Consistentemente</span> &nbsp;<span style="background:#d1ecf1;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#0c5460;">En desarrollo</span> &nbsp;<span style="background:#fff3cd;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#856404;">Parcialmente</span> &nbsp;<span style="background:#f8d7da;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;color:#721c24;">Aún no</span>`;
+  document.getElementById('pdf-btn').textContent=isEN?'⬇ Download PDF':'⬇ Descargar PDF';
+  buildForms();window.scrollTo(0,0);
 }
 
-function buildForms() {
-  const isEN = currentLang === 'en';
-  const questions = isEN ? questionsEN : questionsES;
-  const scale = isEN ? scaleEN : scaleES;
-
-  // Step 1
-  const ctbody = document.getElementById('context-tbody');
-  ctbody.innerHTML = '';
-  currentTeam.forEach((p, i) => {
-    context[i] = null;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td><div class="person-name">${p.name}</div><div class="person-role">${p.role}</div></td>
-      <td><div class="radio-group">
-        <button class="radio-btn" onclick="setContext(${i},'si',this)">${isEN ? 'Yes' : 'Sí'}</button>
-        <button class="radio-btn" onclick="setContext(${i},'no',this)">No</button>
-      </div></td>`;
+function buildForms(){
+  const isEN=currentLang==='en';
+  const questions=isEN?questionsEN:questionsES;
+  const scale=isEN?scaleEN:scaleES;
+  const ctbody=document.getElementById('context-tbody');
+  ctbody.innerHTML='';
+  currentTeam.forEach((p,i)=>{
+    context[i]=null;responses[i]={};
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><div class="person-name">${p.name}</div><div class="person-role">${p.role}</div></td><td><div class="radio-group"><button class="radio-btn" onclick="setContext(${i},'si',this)">${isEN?'Yes — 6 months or less':'Sí — 6 meses o menos'}</button><button class="radio-btn" onclick="setContext(${i},'no',this)">${isEN?'No — more than 6 months':'No — más de 6 meses'}</button></div></td>`;
     ctbody.appendChild(tr);
   });
-
-  // Step 2 headers
-  const headerRow = document.getElementById('eval-header-row');
-  headerRow.innerHTML = `<th class="th-question" id="th-question-label">${isEN ? 'Question' : 'Pregunta'}</th>`;
-  currentTeam.forEach(p => {
-    const th = document.createElement('th');
-    th.className = 'th-person';
-    const firstName = p.name.split(' ')[0];
-    const rest = p.name.split(' ').slice(1).join(' ');
-    th.innerHTML = `<span class="th-person-name">${firstName}<br>${rest}</span><span class="th-person-role">${p.role}</span>`;
-    headerRow.appendChild(th);
+  const headerRow=document.getElementById('eval-header-row');
+  headerRow.innerHTML=`<th class="th-question">${isEN?'Question':'Pregunta'}</th>`;
+  currentTeam.forEach((p,i)=>{
+    const th=document.createElement('th');th.className='th-person';
+    const parts=p.name.split(' ');
+    th.innerHTML=`<span class="th-person-name">${parts[0]}<br>${parts.slice(1).join(' ')}</span><span class="th-person-role">${p.role}</span>`;
+    th.id=`th-person-${i}`;headerRow.appendChild(th);
   });
-
-  // Step 2 rows
-  const etbody = document.getElementById('eval-tbody');
-  etbody.innerHTML = '';
-  let lastBlock = '';
-  questions.forEach((q, qi) => {
-    if (q.block !== lastBlock) {
-      const divRow = document.createElement('tr');
-      divRow.className = 'section-divider';
-      const divTd = document.createElement('td');
-      divTd.colSpan = currentTeam.length + 1;
-      divTd.innerHTML = `<span class="section-divider-label">${q.block === 'perf'
-        ? (isEN ? '📊 Performance Block — What they do today' : '📊 Bloque Rendimiento — Lo que hace hoy')
-        : (isEN ? '🚀 Potential Block — How they project forward' : '🚀 Bloque Potencial — Cómo se proyecta')}</span>`;
-      divRow.appendChild(divTd);
-      etbody.appendChild(divRow);
-      lastBlock = q.block;
+  const etbody=document.getElementById('eval-tbody');etbody.innerHTML='';
+  let lastBlock='';
+  questions.forEach((q,qi)=>{
+    if(q.block!==lastBlock){
+      const divRow=document.createElement('tr');
+      divRow.className=q.block==='desemp'?'section-divider':'section-divider-pot';
+      const divTd=document.createElement('td');divTd.colSpan=currentTeam.length+1;
+      divTd.innerHTML=`<span class="section-divider-label">${q.block==='desemp'?(isEN?'📊 Performance Block — Academic indicators (P1–P5 · max 15 pts)':'📊 Bloque Desempeño — Indicadores académicos (P1–P5 · máx 15 puntos)'):(isEN?'🚀 Potential Block — Growth capacity (P6–P11 · max 18 pts)':'🚀 Bloque Potencial — Capacidad de crecimiento (P6–P11 · máx 18 puntos)')}</span>`;
+      divRow.appendChild(divTd);etbody.appendChild(divRow);lastBlock=q.block;
     }
-    const tr = document.createElement('tr');
-    const qtd = document.createElement('td');
-    qtd.innerHTML = `<div><div class="question-number ${q.block === 'pot' ? 'pot' : ''}">P${qi+1}</div><div class="question-text">${q.text}</div></div>`;
+    const tr=document.createElement('tr');
+    const qtd=document.createElement('td');
+    qtd.innerHTML=`<div><div class="question-number ${q.block==='pot'?'pot':''}">P${qi+1}</div><div class="question-text">${q.text}</div></div>`;
     tr.appendChild(qtd);
-    currentTeam.forEach((p, pi) => {
-      if (!responses[pi]) responses[pi] = {};
-      const td = document.createElement('td');
-      td.innerHTML = `<div class="resp-select">${scale.map((s,si) =>
-        `<button class="resp-opt" onclick="setResp(${pi},'${q.id}','${scaleVals[si]}',this)">${s}</button>`
-      ).join('')}</div>`;
+    currentTeam.forEach((p,pi)=>{
+      const td=document.createElement('td');
+      td.innerHTML=`<div class="resp-select">${scale.map((s,si)=>`<button class="resp-opt" onclick="setResp(${pi},'${q.id}','${scaleVals[si]}',this)">${s}</button>`).join('')}</div>`;
       tr.appendChild(td);
     });
     etbody.appendChild(tr);
   });
-
-  // Step 3
-  const ctbody3 = document.getElementById('closing-tbody');
-  ctbody3.innerHTML = '';
-  const limLabel = isEN ? 'Limited' : 'Limitado';
-  const bueLabel = isEN ? 'Good' : 'Bueno';
-  const altLabel = isEN ? 'High' : 'Alto';
-  currentTeam.forEach((p, i) => {
-    closing[i] = { perf: null, pot: null };
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><div class="person-name">${p.name}</div><div class="person-role">${p.role}</div></td>
-      <td><div class="axis-group">
-        <button class="axis-btn" onclick="setClosing(${i},'perf','lim',this)">${limLabel}</button>
-        <button class="axis-btn" onclick="setClosing(${i},'perf','bue',this)">${bueLabel}</button>
-        <button class="axis-btn" onclick="setClosing(${i},'perf','alt',this)">${altLabel}</button>
-      </div></td>
-      <td><div class="axis-group">
-        <button class="axis-btn" onclick="setClosing(${i},'pot','lim',this)">${limLabel}</button>
-        <button class="axis-btn" onclick="setClosing(${i},'pot','bue',this)">${bueLabel}</button>
-        <button class="axis-btn" onclick="setClosing(${i},'pot','alt',this)">${altLabel}</button>
-      </div></td>`;
-    ctbody3.appendChild(tr);
-  });
 }
 
-// ─── INTERACTION ─────────────────────────────────────────────────────
-function setContext(i, val, btn) {
-  context[i] = val;
-  btn.parentElement.querySelectorAll('.radio-btn').forEach(b => b.className = 'radio-btn');
-  btn.className = `radio-btn selected-${val}`;
+function setContext(i,val,btn){
+  context[i]=val;
+  btn.parentElement.querySelectorAll('.radio-btn').forEach(b=>b.className='radio-btn');
+  btn.className=`radio-btn selected-${val}`;
+  const th=document.getElementById(`th-person-${i}`);
+  const existing=th.querySelector('.th-person-new');
+  if(val==='si'){if(!existing)th.insertAdjacentHTML('beforeend','<span class="th-person-new">⏱ ≤6 meses → Casilla 1</span>');}
+  else{if(existing)existing.remove();}
 }
-function setResp(pi, qid, val, btn) {
-  responses[pi][qid] = val;
-  btn.parentElement.querySelectorAll('.resp-opt').forEach(b => b.className = 'resp-opt');
-  btn.className = `resp-opt sel-${val}`;
+function setResp(pi,qid,val,btn){
+  responses[pi][qid]=val;
+  btn.parentElement.querySelectorAll('.resp-opt').forEach(b=>b.className='resp-opt');
+  btn.className=`resp-opt sel-${val}`;
 }
-function setClosing(i, axis, val, btn) {
-  closing[i][axis] = val;
-  btn.parentElement.querySelectorAll('.axis-btn').forEach(b => b.className = 'axis-btn');
-  btn.className = `axis-btn sel-${val}`;
-}
-
-function goBack() {
-  document.getElementById('school-select-screen').style.display = 'block';
-  document.getElementById('form-screen').style.display = 'none';
-  document.getElementById('results-screen').style.display = 'none';
-  ['ps1','ps2','ps3','ps4'].forEach((id,i) => {
-    document.getElementById(id).className = 'progress-step' + (i===0?' active':'');
-  });
-  document.getElementById('progress-label').textContent = 'Selecciona tu colegio para comenzar';
+function goBack(){
+  document.getElementById('school-select-screen').style.display='block';
+  document.getElementById('form-screen').style.display='none';
+  document.getElementById('results-screen').style.display='none';
+  ['ps1','ps2','ps3'].forEach((id,i)=>{document.getElementById(id).className='progress-step'+(i===0?' active':'');});
+  document.getElementById('progress-label').textContent='Selecciona tu colegio para comenzar';
   window.scrollTo(0,0);
 }
 
-// ─── BOX LOGIC ───────────────────────────────────────────────────────
-function getBox(perf, pot) {
-  const map = {
-    'alt-alt':3,'alt-bue':6,'alt-lim':9,
-    'bue-alt':2,'bue-bue':5,'bue-lim':8,
-    'lim-alt':1,'lim-bue':4,'lim-lim':7
-  };
-  return map[`${perf}-${pot}`] || null;
+function calcScores(pi){
+  const questions=currentLang==='en'?questionsEN:questionsES;
+  let desemp=0,pot=0;
+  questions.forEach(q=>{const val=responses[pi][q.id];const score=scoreMap[val]??0;if(q.block==='desemp')desemp+=score;else pot+=score;});
+  return{desemp,pot};
+}
+function getLevel(score,block){
+  if(block==='desemp'){if(score<=4)return'lim';if(score<=9)return'bue';return'alt';}
+  else{if(score<=5)return'lim';if(score<=11)return'bue';return'alt';}
+}
+function getBox(perf,pot){
+  const map={'alt-alt':3,'alt-bue':6,'alt-lim':9,'bue-alt':2,'bue-bue':5,'bue-lim':8,'lim-alt':1,'lim-bue':4,'lim-lim':7};
+  return map[`${perf}-${pot}`]||5;
 }
 
-// ─── RESULTS ─────────────────────────────────────────────────────────
-function showResults() {
-  const isEN = currentLang === 'en';
-  document.getElementById('form-screen').style.display = 'none';
-  document.getElementById('results-screen').style.display = 'block';
-  ['ps1','ps2','ps3'].forEach(id => document.getElementById(id).className = 'progress-step done');
-  document.getElementById('ps4').className = 'progress-step active';
-  document.getElementById('progress-label').textContent = isEN ? 'Results ready' : 'Resultados listos';
-  document.getElementById('results-title').textContent = (isEN ? 'Results · ' : 'Resultados · ') + currentSchool;
-  document.getElementById('results-sub').textContent = isEN ? 'OMR Assessment 2026 · Leadership Team' : 'Evaluación OMR 2026 · Equipo de Liderazgo';
-  document.getElementById('ninebox-title').textContent = isEN ? '9-Box Matrix Distribution' : 'Distribución en la Matriz 9-Box';
-  document.getElementById('ninebox-sub').textContent = isEN ? 'Position of each team member' : 'Ubicación de cada miembro del equipo';
-  document.getElementById('pot-label').textContent = isEN ? 'POTENTIAL ↑' : 'POTENCIAL ↑';
-  document.getElementById('lim-label').textContent = isEN ? 'Limited' : 'Limitado';
-  document.getElementById('bue-label').textContent = isEN ? 'Good' : 'Bueno';
-  document.getElementById('alt-label').textContent = isEN ? 'High' : 'Alto';
-  document.getElementById('perf-label').textContent = isEN ? 'PERFORMANCE →' : 'RENDIMIENTO →';
-  document.getElementById('pdf-send-label').textContent = isEN ? '📧 Next step — send results' : '📧 Siguiente paso — enviar resultados';
-  document.getElementById('pdf-send-desc').innerHTML = (isEN
-    ? 'Download the PDF with your results and send it to:<br>'
-    : 'Descarga el PDF con los resultados y envíalo a:<br>')
-    + '<strong style="font-size:14px;color:var(--dark);">sandrade@ispschools.com</strong>';
-  document.getElementById('pdf-btn').textContent = isEN ? '⬇ Download PDF' : '⬇ Descargar PDF';
+function showResults(){
+  const isEN=currentLang==='en';
+  const boxLabels=isEN?boxLabelsEN:boxLabelsES;
+  const boxDesc=isEN?boxDescEN:boxDescES;
+  const levelLabel={lim:isEN?'Limited':'Limitado',bue:isEN?'Good':'Bueno',alt:isEN?'High':'Alto'};
+  document.getElementById('form-screen').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+  ['ps1','ps2'].forEach(id=>document.getElementById(id).className='progress-step done');
+  document.getElementById('ps3').className='progress-step active';
+  document.getElementById('progress-label').textContent=(isEN?'Results ready · ':'Resultados listos · ')+currentSchool;
+  document.getElementById('results-title').textContent=(isEN?'Results · ':'Resultados · ')+currentSchool;
+  document.getElementById('results-sub').textContent=isEN?'OMR Assessment 2026 · Leadership Team':'Evaluación OMR 2026 · Equipo de Liderazgo';
+  document.getElementById('pot-label').textContent=isEN?'POTENTIAL ↑':'POTENCIAL ↑';
+  document.getElementById('desemp-label').textContent=isEN?'PERFORMANCE →':'DESEMPEÑO →';
+  document.getElementById('lbl-alto').textContent=isEN?'High':'Alto';
+  document.getElementById('lbl-bueno').textContent=isEN?'Good':'Bueno';
+  document.getElementById('lbl-limitado').textContent=isEN?'Limited':'Limitado';
+  document.getElementById('score-scale-note').innerHTML=isEN
+    ?'Each question scores: <strong style="color:#155724;">Consistently = 3</strong> · <strong style="color:#0c5460;">Developing = 2</strong> · <strong style="color:#856404;">Partially = 1</strong> · <strong style="color:#721c24;">Not yet = 0</strong>'
+    :'Cada pregunta vale: <strong style="color:#155724;">Consistentemente = 3</strong> · <strong style="color:#0c5460;">En desarrollo = 2</strong> · <strong style="color:#856404;">Parcialmente = 1</strong> · <strong style="color:#721c24;">Aún no = 0</strong>';
 
-  const boxLabels = isEN ? boxLabelsEN : boxLabelsES;
-  const perfMap = {lim: isEN?'Limited':'Limitado', bue: isEN?'Good':'Bueno', alt: isEN?'High':'Alto'};
-  const potMap  = {lim: isEN?'Limited':'Limitado', bue: isEN?'Good':'Bueno', alt: isEN?'High':'Alto'};
+  const grid=document.getElementById('results-grid');grid.innerHTML='';
+  const nineboxCells={};for(let b=1;b<=9;b++)nineboxCells[b]=[];
+  let scoreRows=`<table style="width:100%;border-collapse:collapse;font-size:12px;"><thead><tr style="background:var(--green-pale);">
+    <th style="padding:8px 12px;text-align:left;border-bottom:2px solid var(--green-border);">${isEN?'Person':'Persona'}</th>
+    <th style="padding:8px 12px;text-align:center;border-bottom:2px solid var(--green-border);">${isEN?'Performance pts':'Pts Desempeño'}<br><span style="font-weight:400;font-size:10px;">(/15)</span></th>
+    <th style="padding:8px 12px;text-align:center;border-bottom:2px solid var(--green-border);">${isEN?'Performance level':'Nivel Desempeño'}</th>
+    <th style="padding:8px 12px;text-align:center;border-bottom:2px solid var(--green-border);">${isEN?'Potential pts':'Pts Potencial'}<br><span style="font-weight:400;font-size:10px;">(/18)</span></th>
+    <th style="padding:8px 12px;text-align:center;border-bottom:2px solid var(--green-border);">${isEN?'Potential level':'Nivel Potencial'}</th>
+    <th style="padding:8px 12px;text-align:center;border-bottom:2px solid var(--green-border);">${isEN?'Box':'Casilla'}</th>
+  </tr></thead><tbody>`;
 
-  const grid = document.getElementById('results-grid');
-  grid.innerHTML = '';
-  const nineboxCells = {};
-  for (let b=1;b<=9;b++) nineboxCells[b]=[];
-
-  currentTeam.forEach((p, i) => {
-    const perf = closing[i].perf || 'bue';
-    const pot  = closing[i].pot  || 'bue';
-    const box  = getBox(perf, pot);
-    const isNew = context[i] === 'si';
-    if (box) nineboxCells[box].push(p.name.split(' ')[0]);
-    const card = document.createElement('div');
-    card.className = 'result-card';
-    card.innerHTML = `
-      <div class="result-card-top">
-        <div class="result-person-name">${p.name}</div>
-        <div class="result-person-role">${p.role}</div>
-        ${isNew ? `<span class="result-new-badge">⏱ ${isEN?'Less than 12 months in role':'Menos de 12 meses en rol'}</span>` : ''}
-      </div>
-      <div class="result-card-bottom">
-        <div class="result-box-number" style="background:${boxColors[box]||'#aaa'}">${box||'?'}</div>
-        <div>
-          <div class="result-box-label">${boxLabels[box]||''}</div>
-          <div class="result-axes">${isEN?'Performance':'Rendimiento'}: <strong>${perfMap[perf]}</strong> · ${isEN?'Potential':'Potencial'}: <strong>${potMap[pot]}</strong></div>
-        </div>
-      </div>`;
+  currentTeam.forEach((p,i)=>{
+    const isNew=context[i]==='si';
+    const{desemp,pot}=calcScores(i);
+    const despLevel=getLevel(desemp,'desemp');
+    const potLevel=getLevel(pot,'pot');
+    const box=isNew?1:getBox(despLevel,potLevel);
+    nineboxCells[box].push(p.name.split(' ')[0]);
+    const card=document.createElement('div');card.className='result-card';
+    card.innerHTML=`<div class="result-card-top"><div class="result-person-name">${p.name}</div><div class="result-person-role">${p.role}</div>${isNew?`<span class="result-new-badge">⏱ ${isEN?'6 months or less → Box 1':'6 meses o menos → Casilla 1'}</span>`:''}</div>
+      <div class="result-card-bottom"><div class="result-box-number" style="background:${boxColors[box]}">${box}</div>
+      <div><div class="result-box-label">${boxLabels[box]}</div>
+      <div class="result-axes">${isEN?'Performance':'Desempeño'}: <strong>${isNew?'—':levelLabel[despLevel]}</strong> · ${isEN?'Potential':'Potencial'}: <strong>${isNew?'—':levelLabel[potLevel]}</strong></div>
+      <div class="result-score-detail">${isNew?(isEN?'New in role — automatically assigned':'Nuevo en rol — casilla asignada automáticamente'):`${desemp}/15 pts ${isEN?'perf':'desemp'} · ${pot}/18 pts pot`}</div></div></div>`;
     grid.appendChild(card);
+    scoreRows+=`<tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;"><strong>${p.name}</strong><br><span style="font-size:11px;color:var(--soft);">${p.role}</span></td>
+      <td style="padding:8px 12px;text-align:center;">${isNew?'—':desemp}</td><td style="padding:8px 12px;text-align:center;">${isNew?'—':levelLabel[despLevel]}</td>
+      <td style="padding:8px 12px;text-align:center;">${isNew?'—':pot}</td><td style="padding:8px 12px;text-align:center;">${isNew?'—':levelLabel[potLevel]}</td>
+      <td style="padding:8px 12px;text-align:center;"><div style="width:28px;height:28px;border-radius:6px;background:${boxColors[box]};display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:white;">${box}</div></td></tr>`;
   });
+  scoreRows+='</tbody></table>';
+  document.getElementById('score-detail-table').innerHTML=scoreRows;
 
-  // 9-box grid
-  const nbGrid = document.getElementById('ninebox-grid');
-  nbGrid.innerHTML = '';
-  [1,2,3,4,5,6,7,8,9].forEach(b => {
-    const cell = document.createElement('div');
-    cell.style.cssText = `background:${boxColors[b]};border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;gap:2px;`;
-    cell.innerHTML = `<div style="font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:rgba(255,255,255,0.45);">${b}</div>
-      ${nineboxCells[b].map(n=>`<div style="font-size:9px;font-weight:700;color:white;text-align:center;line-height:1.2;">${n}</div>`).join('')}`;
+  const nbGrid=document.getElementById('ninebox-grid');nbGrid.innerHTML='';
+  [1,2,3,4,5,6,7,8,9].forEach(b=>{
+    const cell=document.createElement('div');
+    cell.style.cssText=`background:${boxColors[b]};border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;gap:2px;`;
+    cell.innerHTML=`<div style="font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:rgba(255,255,255,0.4);">${b}</div>${nineboxCells[b].map(n=>`<div style="font-size:9px;font-weight:700;color:white;text-align:center;line-height:1.2;">${n}</div>`).join('')}`;
     nbGrid.appendChild(cell);
   });
 
-  // Legend
-  const legend = document.getElementById('box-legend');
-  legend.innerHTML = `<div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin-bottom:12px;">${isEN?'Box references':'Referencias de casillas'}</div>`;
+  const legend=document.getElementById('box-legend');
+  legend.innerHTML=`<div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin-bottom:12px;">${isEN?'Box references':'Referencias de casillas'}</div>`;
   for(let b=1;b<=9;b++){
-    legend.innerHTML += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-      <div style="width:22px;height:22px;border-radius:5px;background:${boxColors[b]};display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:11px;color:white;flex-shrink:0;">${b}</div>
-      <div style="font-size:12px;color:var(--mid);">${boxLabels[b]}</div></div>`;
+    legend.innerHTML+=`<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;"><div style="width:22px;height:22px;border-radius:5px;background:${boxColors[b]};display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:11px;color:white;flex-shrink:0;">${b}</div><div><div style="font-size:12px;color:var(--dark);font-weight:700;">${boxLabels[b]}</div><div style="font-size:11px;color:var(--soft);line-height:1.4;margin-top:1px;">${boxDesc[b]}</div></div></div>`;
   }
-
   window.scrollTo(0,0);
 }
 
-// ─── PDF ─────────────────────────────────────────────────────────────
-function downloadPDF() {
-  const isEN = currentLang === 'en';
-  const boxLabels = isEN ? boxLabelsEN : boxLabelsES;
-  const today = new Date();
-  const dateStr = today.toLocaleDateString(isEN ? 'en-GB' : 'es-ES', { day:'2-digit', month:'long', year:'numeric' });
-  let rows = '';
-  currentTeam.forEach((p, i) => {
-    const perf = closing[i].perf || 'bue';
-    const pot  = closing[i].pot  || 'bue';
-    const box  = getBox(perf, pot);
-    const isNew = context[i] === 'si';
-    const perfLabel = {lim:isEN?'Limited':'Limitado', bue:isEN?'Good':'Bueno', alt:isEN?'High':'Alto'}[perf];
-    const potLabel  = {lim:isEN?'Limited':'Limitado', bue:isEN?'Good':'Bueno', alt:isEN?'High':'Alto'}[pot];
-    rows += `<tr>
-      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;">
-        <strong style="font-size:13px;">${p.name}</strong>
-        <div style="font-size:11px;color:#6b7280;margin-top:2px;">${p.role}</div>
-        ${isNew ? `<span style="background:#fff3cd;border:1px solid #e8b84b;color:#7a5c00;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;">${isEN?'Less than 12 months in role':'Menos de 12 meses en rol'}</span>` : ''}
-      </td>
-      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;text-align:center;">
-        <div style="width:36px;height:36px;border-radius:8px;background:${boxColors[box]||'#aaa'};display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:white;">${box||'?'}</div>
-      </td>
-      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${boxLabels[box]||''}</td>
-      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${perfLabel}</td>
-      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${potLabel}</td>
-    </tr>`;
+function downloadPDF(){
+  const isEN=currentLang==='en';
+  const boxLabels=isEN?boxLabelsEN:boxLabelsES;
+  const levelLabel={lim:isEN?'Limited':'Limitado',bue:isEN?'Good':'Bueno',alt:isEN?'High':'Alto'};
+  const today=new Date();
+  const dateStr=today.toLocaleDateString(isEN?'en-GB':'es-ES',{day:'2-digit',month:'long',year:'numeric'});
+  let rows='';
+  currentTeam.forEach((p,i)=>{
+    const isNew=context[i]==='si';
+    const{desemp,pot}=calcScores(i);
+    const despLevel=getLevel(desemp,'desemp');
+    const potLevel=getLevel(pot,'pot');
+    const box=isNew?1:getBox(despLevel,potLevel);
+    rows+=`<tr><td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;"><strong>${p.name}</strong><div style="font-size:11px;color:#6b7280;">${p.role}</div>${isNew?`<span style="background:#fff3cd;border:1px solid #e8b84b;color:#7a5c00;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;">${isEN?'6 months or less → Box 1':'6 meses o menos → Casilla 1'}</span>`:''}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;text-align:center;"><div style="width:34px;height:34px;border-radius:7px;background:${boxColors[box]};display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:white;">${box}</div></td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${boxLabels[box]}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${isNew?'—':levelLabel[despLevel]}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${isNew?'—':levelLabel[potLevel]}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-size:12px;">${isNew?'—':`${desemp}/15 · ${pot}/18`}</td></tr>`;
   });
-
-  const win = window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-      *{box-sizing:border-box;margin:0;padding:0;}
-      body{font-family:'Lato',sans-serif;color:#0f1f17;background:white;padding:40px;}
-      .ph{border-bottom:3px solid #1a7c3e;padding-bottom:20px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;}
-      .brand{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#1a7c3e;}
-      .brand span{color:#e8b84b;}
-      .ptitle{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:#0f1f17;margin:6px 0 4px;}
-      .pmeta{font-size:12px;color:#6b7280;}
-      table{width:100%;border-collapse:collapse;margin-bottom:32px;}
-      th{background:#1a7c3e;color:white;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;}
-      .pf{border-top:1px solid #e5e7eb;padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-      .psend{background:#eaf5ee;border:1px solid #b6ddc4;border-radius:8px;padding:12px 18px;font-size:13px;color:#3a4f41;}
-      .psend strong{font-size:14px;color:#0f1f17;display:block;margin-top:4px;}
-      .pconf{font-size:11px;color:#9ca3af;}
-      @media print{body{padding:20px;}}
-    </style></head><body>
-    <div class="ph">
-      <div>
-        <div class="brand">Regional <span>Learning Team</span></div>
-        <div class="ptitle">${isEN?'OMR Results':'Resultados OMR'} · ${currentSchool}</div>
-        <div class="pmeta">${isEN?'Leadership Assessment 2026':'Evaluación de Liderazgo 2026'} · ${dateStr}</div>
-      </div>
-      <div class="pconf">CONFIDENCIAL</div>
-    </div>
-    <table>
-      <thead><tr>
-        <th>${isEN?'Person':'Persona'}</th>
-        <th style="text-align:center;width:60px;">${isEN?'Box':'Casilla'}</th>
-        <th>${isEN?'Description':'Descripción'}</th>
-        <th>${isEN?'Performance':'Rendimiento'}</th>
-        <th>${isEN?'Potential':'Potencial'}</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <div class="pf">
-      <div class="psend">📧 ${isEN?'Please send this PDF to:':'Por favor envía este PDF a:'}<strong>sandrade@ispschools.com</strong></div>
-      <div class="pconf">Regional Learning Team · ISP South America · 2026</div>
-    </div>
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Lato',sans-serif;color:#0f1f17;padding:36px;}
+    .ph{border-bottom:3px solid #1a7c3e;padding-bottom:18px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;}
+    .brand{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#1a7c3e;}.brand span{color:#e8b84b;}
+    .ptitle{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;margin:6px 0 3px;}.pmeta{font-size:11px;color:#6b7280;}
+    table{width:100%;border-collapse:collapse;margin-bottom:28px;}
+    th{background:#1a7c3e;color:white;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:9px 14px;text-align:left;}
+    .snote{background:#eaf5ee;border:1px solid #b6ddc4;border-radius:8px;padding:12px 16px;font-size:12px;color:#3a4f41;margin-bottom:20px;line-height:1.6;}
+    .pf{border-top:1px solid #e5e7eb;padding-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+    .psend{background:#eaf5ee;border:1px solid #b6ddc4;border-radius:8px;padding:10px 16px;font-size:12px;color:#3a4f41;}
+    .psend strong{font-size:13px;color:#0f1f17;display:block;margin-top:3px;}
+    @media print{body{padding:20px;}}</style></head><body>
+    <div class="ph"><div><div class="brand">Regional <span>Learning Team</span></div>
+    <div class="ptitle">${isEN?'OMR Results':'Resultados OMR'} · ${currentSchool}</div>
+    <div class="pmeta">${isEN?'Leadership Assessment 2026':'Evaluación de Liderazgo 2026'} · ${dateStr}</div></div>
+    <div style="font-size:11px;color:#9ca3af;">CONFIDENCIAL</div></div>
+    <div class="snote"><strong>${isEN?'Scoring logic':'Lógica de puntuación'}:</strong> ${isEN?'Consistently=3 · Developing=2 · Partially=1 · Not yet=0':'Consistentemente=3 · En desarrollo=2 · Parcialmente=1 · Aún no=0'}<br>
+    ${isEN?'Performance (P1–P5): 0–4 Limited / 5–9 Good / 10–15 High':'Desempeño (P1–P5): 0–4 Limitado / 5–9 Bueno / 10–15 Alto'} | ${isEN?'Potential (P6–P11): 0–5 Limited / 6–11 Good / 12–18 High':'Potencial (P6–P11): 0–5 Limitado / 6–11 Bueno / 12–18 Alto'}<br>
+    ${isEN?'Members with 6 months or less → Box 1 automatic.':'Personas con 6 meses o menos en el rol → Casilla 1 automática.'}</div>
+    <table><thead><tr>
+      <th>${isEN?'Person':'Persona'}</th><th style="width:50px;text-align:center;">${isEN?'Box':'Casilla'}</th>
+      <th>${isEN?'Description':'Descripción'}</th><th>${isEN?'Performance':'Desempeño'}</th>
+      <th>${isEN?'Potential':'Potencial'}</th><th>${isEN?'Score':'Puntuación'}</th>
+    </tr></thead><tbody>${rows}</tbody></table>
+    <div class="pf"><div class="psend">📧 ${isEN?'Please send this PDF to:':'Por favor envía este PDF a:'}<strong>sandrade@ispschools.com</strong></div>
+    <div style="font-size:11px;color:#9ca3af;">Regional Learning Team · ISP South America · 2026</div></div>
     </body></html>`);
-  win.document.close();
-  win.focus();
-  setTimeout(() => win.print(), 800);
+  win.document.close();win.focus();setTimeout(()=>win.print(),800);
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────
 initSchoolSelector();
 </script>
 </body>
